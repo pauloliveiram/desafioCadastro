@@ -1,7 +1,6 @@
-import java.io.BufferedReader;
+import controllers.PetController;
+
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -22,8 +21,39 @@ public class Menu {
                 opcaoEscolhida = scanner.nextInt();
                 switch (opcaoEscolhida) {
                     case 1:
-                        System.out.println("Cadastrar um novo pet");
+                        System.out.println("1. Cadastrar um novo pet");
                         System.out.println();
+                        System.out.println("Para cadastrar um novo models.Pet, você deve responder as seguintes perguntas:");
+                        File formulario = new File("sistema-pets/src/resources/formulario.txt");
+                        LeitorArquivo.lerArquivo(formulario);
+                        System.out.println("Digite o primeiro nome do pet: ");
+                        String nome = scanner.next();
+                        scanner.nextLine();
+                        System.out.println("Digite o sobrenome nome do pet: ");
+                        String sobrenome = scanner.nextLine();
+                        System.out.println("Digite o tipo do pet");
+                        int tipo = scanner.nextInt();
+                        System.out.println("Digite o sexo do pet");
+                        String sexo = scanner.next();
+                        scanner.nextLine();
+                        System.out.println("Digite o nome da rua onde foi encontrado");
+                        String rua = scanner.nextLine();
+                        System.out.println("Digite o número da casa");
+                        String numeroCasa = scanner.nextLine();
+                        System.out.println("Digite o nome do bairro");
+                        String bairro = scanner.nextLine();
+                        System.out.println("Digite a cidade");
+                        String cidade = scanner.nextLine();
+                        System.out.println("Digite a idade do pet");
+                        System.out.println("Se o pet possui menos de 1 ano, indique a quantidade de meses seguido de 0.");
+                        String idade = scanner.nextLine();
+                        System.out.println("Digite o peso do pet");
+                        String peso = scanner.nextLine();
+                        System.out.println("Digite a raça do pet");
+                        String raca = scanner.nextLine();
+
+                        PetController controller = new PetController();
+                        controller.cadastrarNovoPet(nome, sobrenome, tipo, sexo, rua, numeroCasa, bairro, cidade, idade, peso, raca);
                         break;
                     case 2:
                         System.out.println("Alterar os dados de um pet");
@@ -51,9 +81,9 @@ public class Menu {
             } while (opcaoEscolhida != 6);
         } catch (InputMismatchException ex) {
             System.out.println("Programa encerrado!");
-            System.out.println("Você não pode digitar letras ou caracteres especiais!");
+            System.out.println("Nesse campo, você não pode digitar letras ou caracteres especiais!");
             System.out.println("Para realizar novas operações no sistema, inicialize o programa novamente e insira um número válido!");
         }
-
+        scanner.close();
     }
 }
